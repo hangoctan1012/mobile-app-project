@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Cookial</string>
+        <string name="edit_profile_title">Edit Profile</string>
+        <string name="edit_profile_back_description">Back</string>
+        <string name="edit_profile_change_avatar">Đổi ảnh đại diện</string>
+        <string name="edit_profile_name_label">Tên</string>
+        <string name="edit_profile_name_hint">Nhập tên của bạn</string>
+        <string name="edit_profile_email_label">Email</string>
+        <string name="edit_profile_email_hint">example@gmail.com</string>
+        <string name="edit_profile_link_label">Link</string>
+        <string name="edit_profile_link_hint">yourblog.com</string>
+        <string name="edit_profile_save_button">Save</string>
+</resources>

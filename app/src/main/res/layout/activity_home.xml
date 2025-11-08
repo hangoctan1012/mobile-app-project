@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA">
+
+    <!-- Header với AppBarLayout -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="0dp"
+        app:elevation="0dp">
+
+        <!-- Toolbar Header -->
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#FFFFFF"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetEnd="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- Logo/App Name -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cookial"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorOrange"
+                    android:letterSpacing="0.02"
+                    android:fontFamily="sans-serif-medium" />
+
+                <!-- Action Icons Container -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <!-- Search Icon -->
+                    <ImageView
+                        android:id="@+id/searchImageView"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:src="@android:drawable/ic_menu_search"
+                        android:padding="10dp"
+                        android:contentDescription="Search"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:tint="#424242" />
+
+                    <!-- Notification Icon -->
+                    <ImageView
+                        android:id="@+id/notificationImageView"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:src="@drawable/ic_notification_bell"
+                        android:padding="10dp"
+                        android:contentDescription="Notifications"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:tint="#424242" />
+
+                    <!-- Profile Avatar -->
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profileImageView"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/facecook_logo"
+                        app:civ_border_width="2.5dp"
+                        app:civ_border_color="@color/colorOrange"
+                        android:contentDescription="Profile"
+                        android:background="?attr/selectableItemBackgroundBorderless" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Create Post Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/createPostCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="#FFFFFF"
+        android:elevation="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/createPostAvatarImageView"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/facecook_logo"
+                android:contentDescription="Avatar"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#E0E0E0" />
+
+            <TextView
+                android:id="@+id/createPostTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:text="Bạn đang nghĩ gì?"
+                android:textSize="16sp"
+                android:textColor="#757575"
+                android:background="@drawable/edittext_rounded_bg"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:gravity="center_vertical"
+                android:minHeight="48dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Posts RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/postsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/item_post" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
