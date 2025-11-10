@@ -13,22 +13,17 @@ public class ApiConfig {
     // Đổi IP này thành IP máy tính của bạn khi test trên thiết bị thật
     // Để lấy IP: Windows (ipconfig) | Mac/Linux (ifconfig)
     private static final String EMULATOR_BASE_URL = "http://10.0.2.2:3000/api/";
-    private static final String DEVICE_BASE_URL = "http://192.168.1.100:3000/api/"; // Thay IP này
+    private static final String DEVICE_BASE_URL = "http://192.168.56.1:3000/api/"; // Thay IP này
     
     // Chọn môi trường: true = Emulator, false = Device/Production
-    private static final boolean USE_EMULATOR = true;
+    private static final boolean USE_EMULATOR = false;
     
     // Production URL (nếu có)
-    private static final String PRODUCTION_BASE_URL = "https://your-api-domain.com/api/";
+    private static final String PRODUCTION_BASE_URL = "https://gateway-734851024323.asia-southeast1.run.app/api/";
     
     // ========== GETTER ==========
     public static String getBaseUrl() {
-        if (USE_EMULATOR) {
-            return EMULATOR_BASE_URL;
-        } else {
-            // Có thể kiểm tra BuildConfig.DEBUG để tự động chuyển đổi
-            return DEVICE_BASE_URL;
-        }
+        return PRODUCTION_BASE_URL;
     }
     
     // ========== TIMEOUT SETTINGS ==========

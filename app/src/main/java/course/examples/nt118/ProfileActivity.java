@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 
+import java.util.Map;
+
 import course.examples.nt118.model.UserResponse;
 import course.examples.nt118.network.ApiService;
 import course.examples.nt118.network.RetrofitClient;
@@ -23,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView coverImageView, profileImageView, backButton, notificationButton;
     private TextView nameTextView, emailTextView, linkTextView,
             postsCountTextView, followersCountTextView, followingCountTextView;
-    private Button editButton;
+    private Button editButton, logoutButton;
 
     private String userId;
     private ApiService apiService;
@@ -32,9 +34,6 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        // Khởi tạo RetrofitClient
-        RetrofitClient.init(this);
 
         coverImageView = findViewById(R.id.coverImageView);
         profileImageView = findViewById(R.id.profileImageView);
@@ -47,6 +46,7 @@ public class ProfileActivity extends AppCompatActivity {
         editButton = findViewById(R.id.editProfileButton);
         backButton = findViewById(R.id.backButton);
         notificationButton = findViewById(R.id.notificationButton);
+        logoutButton = findViewById(R.id.logoutButton); // <-- ADD THIS
 
         apiService = RetrofitClient.getApiService();
 
@@ -69,6 +69,9 @@ public class ProfileActivity extends AppCompatActivity {
         notificationButton.setOnClickListener(v ->
                 Toast.makeText(ProfileActivity.this, "Notifications clicked", Toast.LENGTH_SHORT).show()
         );
+
+        // 👉 Xử lý sự kiện LOGOUT
+        logoutButton.setOnClickListener(v -> logout());
     }
 
     private void loadUserProfile(String id) {
@@ -108,4 +111,34 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+    // ✅ Hàm xử lý LOGOUT
+    private void logout() {
+        Call<Map<String, String>> call = apiService.logout();
+
+        call.enqueue(new Callback<Map<String, String>>() {
+            @Override
+            public void onResponse(Call<Map<String, String>> call, Response<Map<String, String>> response) {
+
+                // ✅ Xoá token trong SharedPreferences
+                getSharedPreferences("APP_PREFS", MODE_PRIVATE)
+                        .edit()
+                        .remove("JWT_TOKEN")
+                        .apply();
+
+                Toast.makeText(ProfileActivity.this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
+
+                // ✅ Điều hướng về LoginActivity, xoá lịch sử Backstack
+                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(Call<Map<String, String>> call, Throwable t) {
+                Toast.makeText(ProfileActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
+

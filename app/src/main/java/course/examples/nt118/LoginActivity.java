@@ -95,6 +95,13 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Lỗi khởi tạo: " + e.getMessage(), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
+
+        TextView forgotPasswordTextView = findViewById(R.id.forgotPasswordTextView);
+        // ✅ Xử lý nhấn Forgot Password
+        forgotPasswordTextView.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void loginUser() {
